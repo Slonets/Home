@@ -1,0 +1,30 @@
+﻿@using BusinessLogicLayer.DTOs
+@model List<StorageDto>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Image</th>
+            <th scope="col">Назва авто</th>           
+            <th scope="col">Ціна</th>
+            <th scope="col">Кількість</th>
+        </tr>
+    </thead>
+    <tbody>        
+            @foreach(var storage in Model)
+            { 
+          <tr>
+            <th scope="row">@storage.Car.Id</th>
+            <td>
+             <img src="~/Images/@storage.Car.ImagePath" class="card-img-top w-25" alt="Фото авто">
+            </td>
+            <td>@storage.Car.ModelCar</td>
+            <td>@storage.Car.Price</td>
+            <td>@storage.Car.Quantity штук</td>  
+        </tr>
+            }
+    </tbody>
+</table>
+

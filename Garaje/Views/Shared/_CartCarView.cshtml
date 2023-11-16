@@ -1,0 +1,44 @@
+﻿@model CarCartViewModel
+
+@{
+    string carImagePlaceholder = @"https://www.freeiconspng.com/thumbs/no-image-icon/no-image-icon-15.png";
+}
+
+<div class="col-sm-4">
+    <div class="card">
+               
+         <div class="product-card-img">
+            <img src="~/Images/@Model.Car.ImagePath" class="card-img-top" alt="...">
+        </div>
+        
+        <div class="card-body">
+            <h5 class="card-title">@Model.Car.ModelCar</h5>           
+            <p class="card-text">@Model.Car.ColorCar</p>
+            <p class="fw-bold">Price <span class="badge bg-primary">@Model.Car.Price</span></p>
+            <p class="fw-bold">Кількість<span class="badge bg-primary">@Model.Car.Quantity</span></p>
+            <a asp-controller="Home" asp-action="Details" asp-route-id=@Model.Car.Id class="btn btn-dark">Деталі</a>
+           
+            @if(Model.Car.Quantity>0)
+            {        
+            
+            <a asp-controller="Home" asp-action="Delete" asp-route-id=@Model.Car.Id class="btn btn-danger">Видалити</a>
+            <a asp-controller="Home" asp-action="Edit" asp-route-id=@Model.Car.Id class="btn btn-success">Редагувати</a>
+
+            @if (!Model.IsCarChoose)
+            {
+                <a asp-controller="Cart" asp-action="Add" asp-route-id=@Model.Car.Id class="btn btn-info">Додати в корзину</a>
+            }
+            else
+            {
+                <a asp-controller="Cart" asp-action="Remove" asp-route-id=@Model.Car.Id class="btn btn-secondary">Видалити з корзини</a>
+                }
+
+            }
+            else
+            {
+                <h3>Немає у наявності</h3>
+            }
+
+        </div>
+    </div>
+</div>

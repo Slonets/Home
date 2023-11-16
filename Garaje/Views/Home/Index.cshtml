@@ -1,0 +1,86 @@
+﻿@model List<CarCartViewModel>
+
+@{
+    
+}
+
+ <h4 class="text-center">Список машин</h4>
+
+
+ <!-- кнопка додавання -->
+
+   <div class="col-2 m-3">               
+       <a class="btn btn-warning" asp-controller="Home" asp-action="Create" role="button">Створите нове авто</a>        
+  </div>
+
+<div class="container">
+    <div class="row">
+        
+        <div class="col-3">
+            <!-- start col-3 -->
+            @*navigation category*@
+            <ul class="nav flex-column">
+                @foreach (var category in ViewBag.ListCategories)
+                {
+
+                    @if (ViewBag.ActiveCategoryId == category.Id)
+                    {
+                       <li class="nav-item">
+                               <a class="list-group-item list-group-item-action active" aria-current="true">@category.Name</a>
+                       </li>
+                    }
+                    else
+                    {
+                      <li class="nav-item">
+                      <a asp-controller="Home" asp-action="Index" asp-route-category_id="@category.Id" class="nav-link active" aria-current="page">@category.Name</a>
+                      </li>
+                    }
+                }              
+            </ul>
+        </div> <!-- close col-3 -->
+
+
+<div class="col-9">
+            <!-- start col-3 -->
+            @*якщо модель не порожня, то виводиться*@
+    @if (Model.Any())
+    {
+     <div class="row">
+    @foreach (var car in Model)
+    {
+        //Два способи підключення додаткової сторінки
+       <partial name="_CartCarView" model="car"/>
+       @*await Html.RenderPartialAsync("_CartCarView", car);*@
+    }
+    </div>
+    }
+    else
+    {
+      <div class="row">
+        <h3>Cars was not found...</h3>
+      </div>
+    }
+        </div> <!-- close col-9 -->
+
+</div> <!-- close row -->
+
+    <h2 class="text-center">ТОП 5 авто</h2>
+
+    <div class="card-group">        
+        @foreach (var carTOP in ViewBag.TopFive)
+        {       
+        <div class="card" style="width: 18rem;">
+                <img src="@(carTOP.ImagePath)" class="card-img-top" alt="...">
+            <div class="card-body">
+                    <h5 class="card-title">@carTOP.ModelCar</h5>
+                    <p class="card-text">@carTOP.Discription</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                    <li class="list-group-item">@carTOP.ColorCar</li>
+                    <li class="list-group-item">@carTOP.Price гривень</li>                
+            </ul>          
+        </div>
+        }
+</div>
+
+</div> <!-- close container -->

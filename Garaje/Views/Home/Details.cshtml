@@ -1,0 +1,13 @@
+﻿@using BusinessLogicLayer.DTOs
+@model CarDto
+
+
+<div class="container-lg">
+    <h4 class="text-center">@Model.ModelCar</h4>
+    <p class="text-center">Колір: @Model.ColorCar </p>
+    <img src="~/Images/@Model.ImagePath" class="img-fluid" alt="Фото машини">
+    <p>@Model.Discription</p>
+    <h2 class="text-center">Ціна: @Model.Price</h2>
+</div>
+
+<a asp-controller="Home" asp-action="Index" class="btn btn-primary">Go to Back</a>

@@ -1,0 +1,59 @@
+﻿@using BusinessLogicLayer.DTOs
+@model List<CarDto>
+
+@{
+    string carImagePlaceholder = @"https://www.freeiconspng.com/thumbs/no-image-icon/no-image-icon-15.png";
+}
+
+<div class="container">
+    @if (Model.Any())
+    {
+            <h3>Count car: @Model.Count()</h3>
+            <div class="row">           
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">id</th>
+                            <th scope="col">Image</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Operations</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var car in Model)
+                    {
+                             <tr>
+                             <th scope="row">@car.Id</th>
+                             <td>
+
+                                <img src="~/Images/@car.ImagePath" class="card-img-top w-25" alt="...">
+                                    </td>
+                                    <td>@car.ModelCar</td>
+                                    <td>@car.Price грн.</td>
+                                    <td>@car.ColorCar</td>
+                                    <td>
+                                        <div class="d-flex justify-content-evenly">
+
+                                    <a asp-controller="Cart" asp-action="Remove" asp-route-id=@car.Id class="btn btn-danger">
+                                                       Видалити
+                                                <i class="bi bi-trash"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                    }
+                    </tbody>
+                </table>
+                <h6>Total: @Model.Sum(p=>p.Price) грн.</h6>
+                <a asp-controller="Order" asp-action="CreateOrder" class="btn btn-primary">Оформити замовлення</a>
+            </div>
+
+    }
+    else
+    {
+            <h3>Cars was not found...</h3>
+    }
+
+</div>

@@ -1,0 +1,66 @@
+﻿@using BusinessLogicLayer.DTOs
+@model CarDto
+
+
+<div class="container">
+
+    <div class="row">
+        <h4>Редагування машини @Model.ModelCar</h4>
+     </div>
+
+@*форма відправляє дані на контролер Home за методом post*@
+
+
+ <form method="post" asp-controller="Home" asp-action="Edit" сlas="row g-3" enctype="multipart/form-data">
+    
+        @*означає, що виведе усі помилки зверху*@
+    <div asp-validation-summary="All"></div>
+
+     <div class="col-md-6">
+        <label asp-for="ModelCar" for="ModelCar" class="form-label">Модель авто</label>
+        <input asp-for="ModelCar" type="text" class="form-control" value="@Model.ModelCar">
+        <span asp-validation-for="ModelCar" class="form-text text-danger"></span>
+    </div>
+
+    <div class="col-md-6">
+        <label asp-for="ColorCar" for="ColorCar" class="form-label">Колір авто</label>
+        <input asp-for="ColorCar" type="text" class="form-control" value="@Model.ColorCar">
+        <span asp-validation-for="ColorCar" class="form-text text-danger"></span>
+    </div>
+
+    <div class="col-md-6">
+        <label asp-for="Price" for="Price" class="form-label">Ціна</label>
+        <input asp-for="Price" type="text" class="form-control" value="@Model.Price">
+        <span asp-validation-for="Price" class="form-text text-danger"></span>
+    </div>
+
+     <div class="col-md-6">
+         <img src="~/Images/@Model.ImagePath" class="card-img-top w-25"/>
+        <label asp-for="Image" class="form-label">Фото</label>
+        <input asp-for="Image" type="file" class="form-control">
+    </div>
+
+     <div class="col-md-12">
+        <label asp-for="Discription" for="Discription" class="form-label">Опис авто</label>
+        <input asp-for="Discription" type="text" class="form-control" value="@Model.Discription">
+         <span asp-validation-for="Discription" class="form-text text-danger"></span>
+    </div>
+
+    <div class="col-md-12">
+        <label asp-for="Quantity" for="Quantity" class="form-label">Кількість доступних авто</label>
+        <input asp-for="Quantity" type="number" class="form-control" value="@Model.Quantity">
+         <span asp-validation-for="Quantity" class="form-text text-danger"></span>
+    </div>
+
+   <div class="col-md-6">
+        <label asp-for="CategoryId" class="form-label">Категорія</label>
+        <select asp-for="CategoryId" asp-items="@ViewBag.ListCategory" class="form-control">Категорія</select>
+        <span asp-validation-for="CategoryId" class="form-text text-danger"></span>
+    </div>
+ @*   клас кнопки сабміт говорить, що воно відправляє дані на сервер*@
+ <div class="col-12">
+      <button type="submit" class="btn btn-primary">Зберегти</button>
+ </div>
+</form>
+
+</div> @*cotainer close*@
